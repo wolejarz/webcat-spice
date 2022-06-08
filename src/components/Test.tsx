@@ -3,31 +3,11 @@ import React from "react";
 import { makeObservable, observable, computed, autorun, action } from "mobx";
 import mainStore from "../stores/MainStore";
 
-class OrderLine {
-  price = 0;
-  amount = 1;
-
-  constructor() {
-    makeObservable(this, {
-      price: observable,
-      amount: observable,
-      total: computed
-    });
-    console.log("From constructor .....................");
-  }
-
-  setPrice = action(value => (this.price = value));
-
-  get total() {
-    console.log("Computing...");
-    return this.price * this.amount;
-  }
-}
-
 class TestComponent extends React.Component {
   componentDidMount() {
     setTimeout(() => {
-      const order = new OrderLine();
+      const order = mainStore;
+      console.log("Starting ........................");
 
       autorun(() => {
         console.log("Total: " + order.total);
