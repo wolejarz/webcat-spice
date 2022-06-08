@@ -10,31 +10,31 @@ class TestComponent extends React.Component {
       console.log("Starting ........................");
 
       autorun(() => {
-        console.log("Total: " + order.total);
+        // console.log("Total: " + order.total);
       });
       // Computing...
       // Total: 0
 
-      console.log(order.total);
+      // console.log(order.total);
       // (No recomputing!)
       // 0
 
-      order.setPrice(5);
+      //  order.setPrice(5);
       // Computing...
       // (No autorun)
 
-      order.setPrice(2);
+      //  order.setPrice(2);
       // Computing...
       // Total: 10
 
       //stop();
 
-      order.setPrice(3);
+      //   order.setPrice(3);
     }, 2000);
   }
 
   render() {
-    return <div className="statistics">TEST component: {mainStore.observable1}</div>;
+    return <div className="statistics">TEST component: </div>;
   }
 }
 
