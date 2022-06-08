@@ -1,4 +1,4 @@
-import { observable, action, configure, makeObservable, computed } from "mobx";
+import { observable, action, configure, makeObservable, computed, autorun } from "mobx";
 
 configure({
   enforceActions: "always",
@@ -64,10 +64,6 @@ class MainStore {
     return this.pageSize;
   }
 
-  autorun() {
-    console.log("Something has changed");
-  }
-
   replaceColumnsOnCurrentPage = newColumns => this.columnsOnCurrentPage.replace(newColumns);
 
   initializeColumnDefinitions = (columnNames, columnDefinitions) => {
@@ -95,10 +91,7 @@ class MainStore {
 
   setPageSize = pageSize => (this.pageSize = pageSize);
 
-  setPageNr = pageNr => {
-    console.log("PageNr has changed");
-    this.pageNr = pageNr;
-  };
+  setPageNr = pageNr => (this.pageNr = pageNr);
 
   setDataIsLoaded = status => (this.dataIsLoaded = status);
 

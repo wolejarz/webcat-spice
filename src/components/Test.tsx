@@ -1,40 +1,29 @@
+import { autorun } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
-import { makeObservable, observable, computed, autorun, action } from "mobx";
 import mainStore from "../stores/MainStore";
 
 class TestComponent extends React.Component {
   componentDidMount() {
     setTimeout(() => {
-      const order = mainStore;
       console.log("Starting ........................");
 
       autorun(() => {
-        // console.log("Total: " + order.total);
+        console.log("Total: " + mainStore.pageNr);
       });
-      // Computing...
-      // Total: 0
 
-      // console.log(order.total);
-      // (No recomputing!)
-      // 0
+      console.log(mainStore.pageNr);
 
-      //  order.setPrice(5);
-      // Computing...
-      // (No autorun)
+      mainStore.setPageNr(5);
 
-      //  order.setPrice(2);
-      // Computing...
-      // Total: 10
+      mainStore.setPageNr(10);
 
-      //stop();
-
-      //   order.setPrice(3);
+      mainStore.setPageNr(15);
     }, 2000);
   }
 
   render() {
-    return <div className="statistics">TEST component: </div>;
+    return <div className="statistics">TEST component:{mainStore.pageNr} </div>;
   }
 }
 
