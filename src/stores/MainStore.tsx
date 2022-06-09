@@ -1,4 +1,4 @@
-import { observable, action, configure, makeObservable, computed, autorun } from "mobx";
+import { observable, action, configure, makeObservable, computed } from "mobx";
 
 configure({
   enforceActions: "always",
@@ -150,8 +150,8 @@ class MainStore {
   };
 }
 
-const appStore = new MainStore();
-export default appStore;
+const mainStore = new MainStore();
+export default mainStore;
 
 // import { observable, action, configure, makeObservable, computed, autorun } from "mobx";
 
