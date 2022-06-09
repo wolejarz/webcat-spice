@@ -1,5 +1,5 @@
 import { autorun } from "mobx";
-import { observer } from "mobx-react";
+import { Observer } from "mobx-react";
 import React from "react";
 import mainStore from "../stores/MainStore";
 
@@ -23,8 +23,8 @@ class TestComponent extends React.Component {
   }
 
   render() {
-    return <div className="statistics">TEST component:{mainStore.pageNr} </div>;
+    return <Observer>{() => <div className="statistics">TEST component:{mainStore.pageNr} </div>}</Observer>;
   }
 }
 
-export default observer(TestComponent);
+export default TestComponent;
