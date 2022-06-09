@@ -56,6 +56,6 @@ export const fetchDefinitionsFromFile = async url => {
   return definitions;
 };
 
-export const compareRows = (a, b, orderedByColumn, orderDirection) => {
+export const compareRows = (a, b, orderedByColumn, orderDirection, dataType) => {
   return 0;
 };

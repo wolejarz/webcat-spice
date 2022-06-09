@@ -1,4 +1,5 @@
 import { observable, action, configure, makeObservable, computed } from "mobx";
+import { compareRows } from "../utilities/Utilities";
 
 configure({
   enforceActions: "always",
@@ -60,7 +61,8 @@ class MainStore {
 
   get sortedDataRows() {
     const rawData = this.dataIsLoaded ? this.dataSet.slice() : [];
-
+    const dataType = this.columnDefinitions.find(column => column.name === this.orderedByColumn);
+    rawData.sort((a, b) => compareRows(a, b, this.orderedByColumn, this.orderDirection, dataType));
     return rawData;
   }
 
