@@ -116,7 +116,7 @@ class DataGrid extends React.Component {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={mainStore.currentPage.length}
+            count={mainStore.filteredDataRows.length}
             rowsPerPage={mainStore.pageSize}
             page={mainStore.pageNr}
             onPageChange={this.handleChangePage}

@@ -3,8 +3,7 @@ import { observable, action, configure, makeObservable, computed } from "mobx";
 configure({
   enforceActions: "always",
   computedRequiresReaction: true,
-  reactionRequiresObservable: true,
-  observableRequiresReaction: true
+  reactionRequiresObservable: true
 });
 
 type Order = "asc" | "desc";
@@ -18,6 +17,7 @@ class MainStore {
   columnDefinitions: any[] = [];
   columnsOnCurrentPage = observable.array();
   globalOverlayHandlers: any[] = [];
+  dataFetchingHasStarted = false;
 
   startPageIndex = 0;
 

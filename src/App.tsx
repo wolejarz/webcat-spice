@@ -10,9 +10,12 @@ import mainStore from "./stores/MainStore";
 
 class App extends React.Component {
   async componentDidMount() {
-    const columnDefinitions = await fetchDefinitionsFromFile("http://localhost:3000/data/keyword_info.json");
-    await fetchDataFromFile("http://localhost:3000/data/spice_catalog.txt", columnDefinitions);
-    mainStore.setDataIsLoaded(true);
+    if (!mainStore.dataFetchingHasStarted) {
+      mainStore.dataFetchingHasStarted = true;
+      const columnDefinitions = await fetchDefinitionsFromFile("http://localhost:3000/data/keyword_info.json");
+      await fetchDataFromFile("http://localhost:3000/data/spice_catalog.txt", columnDefinitions);
+      mainStore.setDataIsLoaded(true);
+    }
   }
 
   render() {
