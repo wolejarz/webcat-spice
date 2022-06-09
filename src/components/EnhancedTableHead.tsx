@@ -8,17 +8,9 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 
 import mainStore from "../stores/MainStore";
 
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-
 interface EnhancedTableProps {
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, columnName) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -29,9 +21,6 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
     const orderDirection = mainStore.orderDirection;
     const orderedByColumn = mainStore.orderedByColumn;
     const rowCount = mainStore.currentPage.length;
-    const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-      this.props.onRequestSort(event, property);
-    };
     return (
       <TableHead>
         <TableRow>
@@ -51,7 +40,7 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
               <TableSortLabel
                 active={orderedByColumn === mainStore.columnDefinitions[index].name}
                 direction={orderedByColumn === mainStore.columnDefinitions[index].name ? orderDirection : "asc"}
-                onClick={createSortHandler(mainStore.columnDefinitions[index].name)}
+                onClick={event => this.props.onRequestSort(event, mainStore.columnDefinitions[index].name)}
               ></TableSortLabel>
               {mainStore.columnDefinitions[index].name}
             </TableCell>

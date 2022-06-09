@@ -59,8 +59,9 @@ class MainStore {
   }
 
   get sortedDataRows() {
-    const sortedData = this.dataIsLoaded ? this.dataSet : [];
-    return sortedData;
+    const rawData = this.dataIsLoaded ? this.dataSet : [];
+
+    return rawData;
   }
 
   get filteredDataRows() {

@@ -19,10 +19,10 @@ import EnhancedTableHead from "./EnhancedTableHead";
 configure({ enforceActions: "always" });
 
 class DataGrid extends React.Component {
-  handleRequestSort = (event: React.MouseEvent<unknown>, property) => {
-    const isAsc = mainStore.orderedByColumn === property && mainStore.orderDirection === "asc";
+  handleRequestSort = (event: React.MouseEvent<unknown>, columnName) => {
+    const isAsc = mainStore.orderedByColumn === columnName && mainStore.orderDirection === "asc";
     mainStore.setOrderDirection(isAsc ? "desc" : "asc");
-    mainStore.setOrderedByColumn(property);
+    mainStore.setOrderedByColumn(columnName);
   };
 
   handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
