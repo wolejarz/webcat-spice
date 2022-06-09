@@ -15,10 +15,8 @@ interface DataRow {
 
 class MainStore {
   dataSet: DataRow[] = [];
-  filteredAndSortedDataRows: DataRow[] = [];
   columnDefinitions: any[] = [];
   columnsOnCurrentPage = observable.array();
-  currentPage: DataRow[] = [];
   globalOverlayHandlers: any[] = [];
 
   startPageIndex = 0;
@@ -45,6 +43,8 @@ class MainStore {
       infoBarMessage: observable,
       dataIsLoaded: observable,
       sortedDataRows: computed,
+      filteredDataRows: computed,
+      currentPage: computed,
       replaceColumnsOnCurrentPage: action,
       initializeColumnDefinitions: action,
       updateFilter: action,
@@ -59,10 +59,15 @@ class MainStore {
   }
 
   get sortedDataRows() {
-    //const sortedData = this.pageNr > 2 ? this.dataSet : [];
-    console.log("Sorted data is computed:");
-    return this.pageSize;
+    const sortedData = this.dataIsLoaded ? this.dataSet : [];
+    return sortedData;
   }
+
+  get filteredDataRows() {
+    return this.sortedDataRows;
+  }
+
+  get currentPage() {}
 
   replaceColumnsOnCurrentPage = newColumns => this.columnsOnCurrentPage.replace(newColumns);
 
@@ -152,44 +157,3 @@ class MainStore {
 
 const mainStore = new MainStore();
 export default mainStore;
-
-// import { observable, action, configure, makeObservable, computed, autorun } from "mobx";
-
-// configure({
-//   enforceActions: "always"
-// });
-
-// class MainStore {
-//   observable1 = "";
-//   observable2 = "";
-
-//   price = 0;
-//   amount = 1;
-
-//   constructor() {
-//     makeObservable(this, {
-//       observable1: observable,
-//       observable2: observable,
-//       setObservable1: action,
-//       price: observable,
-//       amount: observable,
-//       total: computed
-//     });
-//     autorun(() => console.log("Autorun from constructor", this.total));
-//   }
-
-//   setPrice = action(value => (this.price = value));
-
-//   get total() {
-//     console.log("Computing...");
-//     return this.price * this.amount;
-//   }
-
-//   setObservable1 = action((value: string) => {
-//     console.log("Observable changed to:", value);
-//     this.observable1 = value;
-//   });
-// }
-
-// const mainStore = new MainStore();
-// export default mainStore;
