@@ -59,7 +59,7 @@ class MainStore {
   }
 
   get sortedDataRows() {
-    const rawData = this.dataIsLoaded ? this.dataSet : [];
+    const rawData = this.dataIsLoaded ? this.dataSet.slice() : [];
 
     return rawData;
   }

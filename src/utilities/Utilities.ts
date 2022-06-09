@@ -57,5 +57,5 @@ export const fetchDefinitionsFromFile = async url => {
 };
 
 export const compareRows = (a, b, orderedByColumn, orderDirection) => {
-  return 1;
+  return 0;
 };
