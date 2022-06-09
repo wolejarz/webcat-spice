@@ -47,7 +47,7 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
             return data;
         }
       });
-      mainStore.dataSet.push({ dataRow: typedDataRow, isSelected: false });
+      if (index < 50) mainStore.dataSet.push({ dataRow: typedDataRow, isSelected: false });
     }
   });
   console.log(
@@ -67,5 +67,24 @@ export const fetchDefinitionsFromFile = async url => {
 };
 
 export const compareRows = (a, b, orderedByColumn, orderedByColumnIndex, orderDirection, dataType) => {
-  return 0;
+  if (orderedByColumnIndex < 0) return 0;
+  console.log(
+    "SORTING:",
+    a.dataRow[orderedByColumnIndex],
+    b.dataRow[orderedByColumnIndex],
+    orderedByColumn,
+    orderedByColumnIndex,
+    orderDirection,
+    dataType
+  );
+  let compResult;
+  switch (dataType) {
+    case "f":
+    case "l":
+      compResult = a.dataRow[orderedByColumnIndex] - b.dataRow[orderedByColumnIndex];
+      break;
+    default:
+      compResult = a.dataRow[orderedByColumnIndex] - b.dataRow[orderedByColumnIndex];
+  }
+  return compResult;
 };
