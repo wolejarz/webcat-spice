@@ -67,7 +67,10 @@ class MainStore {
     return this.sortedDataRows;
   }
 
-  get currentPage() {}
+  get currentPage() {
+    const data = this.filteredDataRows.slice(this.pageNr * this.pageSize, (this.pageNr + 1) * this.pageSize);
+    return data;
+  }
 
   replaceColumnsOnCurrentPage = newColumns => this.columnsOnCurrentPage.replace(newColumns);
 

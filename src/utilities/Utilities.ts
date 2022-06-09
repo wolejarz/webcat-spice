@@ -40,7 +40,6 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
       mainStore.dataSet.push({ dataRow: dataRow, isSelected: false });
     }
   });
-  mainStore.currentPage = mainStore.dataSet.slice(0);
   console.log(
     "Number of rows: ",
     mainStore.dataSet.length,
