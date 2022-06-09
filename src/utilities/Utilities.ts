@@ -37,7 +37,17 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
       mainStore.replaceColumnsOnCurrentPage(newColumns);
     } else {
       const dataRow = dataLine.split("\t");
-      mainStore.dataSet.push({ dataRow: dataRow, isSelected: false });
+      const typedDataRow = dataRow.map((data, index) => {
+        switch (mainStore.columnDefinitions[index].type) {
+          case "f":
+            return parseFloat(data);
+          case "l":
+            return parseInt(data);
+          default:
+            return data;
+        }
+      });
+      mainStore.dataSet.push({ dataRow: typedDataRow, isSelected: false });
     }
   });
   console.log(
@@ -56,6 +66,6 @@ export const fetchDefinitionsFromFile = async url => {
   return definitions;
 };
 
-export const compareRows = (a, b, orderedByColumn, orderDirection, dataType) => {
+export const compareRows = (a, b, orderedByColumn, orderedByColumnIndex, orderDirection, dataType) => {
   return 0;
 };

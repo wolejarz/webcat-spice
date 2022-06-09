@@ -61,8 +61,12 @@ class MainStore {
 
   get sortedDataRows() {
     const rawData = this.dataIsLoaded ? this.dataSet.slice() : [];
-    const dataType = this.columnDefinitions.find(column => column.name === this.orderedByColumn);
-    rawData.sort((a, b) => compareRows(a, b, this.orderedByColumn, this.orderDirection, dataType));
+    const orderedByColumnIndex = this.columnDefinitions.findIndex(column => column.name === this.orderedByColumn);
+    const dataType = orderedByColumnIndex !== -1 ? this.columnDefinitions[orderedByColumnIndex].type : "notype";
+    console.log("From sorting:", this.orderedByColumn, orderedByColumnIndex, dataType);
+    rawData.sort((a, b) =>
+      compareRows(a, b, this.orderedByColumn, orderedByColumnIndex, this.orderDirection, dataType)
+    );
     return rawData;
   }
 
