@@ -54,40 +54,38 @@ class DataGrid extends React.Component {
   render() {
     const emptyRows = mainStore.currentPage.length === 0 || mainStore.pageSize === 0;
     const dataRows = mainStore.dataIsLoaded
-      ? mainStore.currentPage
-          .slice(mainStore.pageNr * mainStore.pageSize, mainStore.pageNr * mainStore.pageSize + mainStore.pageSize)
-          .map((row, rowIndex) => {
-            const isItemSelected = row.isSelected;
-            const labelId = `enhanced-table-checkbox-${rowIndex}`;
-            const rowCells = mainStore.columnsOnCurrentPage.map(columnIndex => (
-              <TableCell key={uuidv4()} style={{ whiteSpace: "nowrap" }} align="right">
-                {row.dataRow[columnIndex]}
+      ? mainStore.currentPage.map((row, rowIndex) => {
+          const isItemSelected = row.isSelected;
+          const labelId = `enhanced-table-checkbox-${rowIndex}`;
+          const rowCells = mainStore.columnsOnCurrentPage.map(columnIndex => (
+            <TableCell key={uuidv4()} style={{ whiteSpace: "nowrap" }} align="right">
+              {row.dataRow[columnIndex]}
+            </TableCell>
+          ));
+          return (
+            <TableRow
+              hover
+              onClick={event => this.handleClick(event, row)}
+              role="checkbox"
+              aria-checked={isItemSelected}
+              tabIndex={-1}
+              key={uuidv4()}
+              selected={isItemSelected}
+            >
+              <TableCell padding="checkbox">
+                <Checkbox
+                  color="primary"
+                  checked={isItemSelected}
+                  onChange={event => this.handleSelectRow(event, row)}
+                  inputProps={{
+                    "aria-labelledby": labelId
+                  }}
+                />
               </TableCell>
-            ));
-            return (
-              <TableRow
-                hover
-                onClick={event => this.handleClick(event, row)}
-                role="checkbox"
-                aria-checked={isItemSelected}
-                tabIndex={-1}
-                key={uuidv4()}
-                selected={isItemSelected}
-              >
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    color="primary"
-                    checked={isItemSelected}
-                    onChange={event => this.handleSelectRow(event, row)}
-                    inputProps={{
-                      "aria-labelledby": labelId
-                    }}
-                  />
-                </TableCell>
-                {rowCells}
-              </TableRow>
-            );
-          })
+              {rowCells}
+            </TableRow>
+          );
+        })
       : null;
     return (
       <Box sx={{ width: "100%" }}>
