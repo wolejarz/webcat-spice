@@ -58,7 +58,7 @@ class DataGrid extends React.Component {
           const labelId = `enhanced-table-checkbox-${rowIndex}`;
           const rowCells = mainStore.columnsOnCurrentPage.map(columnIndex => (
             <TableCell key={uuidv4()} style={{ whiteSpace: "nowrap" }} align="right">
-              {row.dataRow[columnIndex]}
+              {row.dataRow[columnIndex].toString()}
             </TableCell>
           ));
           return (
