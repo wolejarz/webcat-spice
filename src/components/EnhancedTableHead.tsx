@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import React, { Fragment } from "react";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -21,6 +21,22 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
     const orderDirection = mainStore.orderDirection;
     const orderedByColumn = mainStore.orderedByColumn;
     const rowCount = mainStore.currentPage.length;
+    const renderHeaderBody = index => {
+      return (
+        <Fragment>
+          <div>
+            <TableSortLabel
+              active={orderedByColumn === mainStore.columnDefinitions[index].name}
+              direction={orderedByColumn === mainStore.columnDefinitions[index].name ? orderDirection : "asc"}
+              onClick={event => this.props.onRequestSort(event, mainStore.columnDefinitions[index].name)}
+            ></TableSortLabel>
+            {mainStore.columnDefinitions[index].name}
+          </div>
+          <div>{`{FILTER BUTTON}`}</div>
+        </Fragment>
+      );
+    };
+
     return (
       <TableHead>
         <TableRow>
@@ -37,12 +53,7 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
           </TableCell>
           {mainStore.columnsOnCurrentPage.map(index => (
             <TableCell key={mainStore.columnDefinitions[index].name} align={"left"}>
-              <TableSortLabel
-                active={orderedByColumn === mainStore.columnDefinitions[index].name}
-                direction={orderedByColumn === mainStore.columnDefinitions[index].name ? orderDirection : "asc"}
-                onClick={event => this.props.onRequestSort(event, mainStore.columnDefinitions[index].name)}
-              ></TableSortLabel>
-              {mainStore.columnDefinitions[index].name}
+              {renderHeaderBody(index)}
             </TableCell>
           ))}
         </TableRow>
