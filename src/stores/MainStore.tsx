@@ -34,6 +34,8 @@ class MainStore {
 
   dataIsLoaded = false;
 
+  filterOverlayAnchorEl: null | HTMLElement;
+
   constructor() {
     makeObservable(this, {
       startPageIndex: observable,
@@ -43,6 +45,7 @@ class MainStore {
       orderDirection: observable,
       infoBarMessage: observable,
       dataIsLoaded: observable,
+      filterOverlayAnchorEl: observable,
       sortedDataRows: computed,
       filteredDataRows: computed,
       currentPage: computed,
@@ -55,7 +58,8 @@ class MainStore {
       setPageSize: action,
       setPageNr: action,
       setDataIsLoaded: action,
-      toggleSelection: action
+      toggleSelection: action,
+      setFilterOverlayAnchorEl: action
     });
   }
 
@@ -112,6 +116,10 @@ class MainStore {
 
   getFilterByName = name => {
     return this.columnDefinitions.find(definition => definition.name === name);
+  };
+
+  setFilterOverlayAnchorEl = element => {
+    this.filterOverlayAnchorEl = element;
   };
 
   isFiltered = (dataRow, activeFilters) => {
