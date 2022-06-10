@@ -1,5 +1,6 @@
+import { TextField } from "@mui/material";
 import { observer } from "mobx-react";
-import React from "react";
+import React, { Fragment } from "react";
 import mainStore from "../stores/MainStore";
 
 interface FilterOverlayInterface {
@@ -9,9 +10,10 @@ interface FilterOverlayInterface {
 class FilterOverlay extends React.Component<FilterOverlayInterface> {
   render() {
     return (
-      <div className="info-bar">
-        <div className="statistics">XXXXX</div>
-      </div>
+      <Fragment>
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      </Fragment>
     );
   }
 }

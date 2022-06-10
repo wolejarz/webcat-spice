@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
 
 import mainStore from "../stores/MainStore";
+import FilterOverlay from "./FilterOverlay";
 
 interface EnhancedTableProps {
   numSelected: number;
@@ -43,7 +44,9 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
               {`<212121221,1121221>`}
             </button>
             <Popper id={id} open={open} anchorEl={mainStore.filterOverlayAnchorEl}>
-              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>The content of the Popper.</Box>
+              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                <FilterOverlay columnIndex={index} />
+              </Box>
             </Popper>
           </div>
         </Fragment>
