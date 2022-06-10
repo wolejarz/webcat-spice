@@ -5,6 +5,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import Box from "@mui/material/Box";
+import Popper from "@mui/material/Popper";
 
 import mainStore from "../stores/MainStore";
 
@@ -14,13 +16,17 @@ interface EnhancedTableProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-//const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-
 class EnhancedTableHead extends React.Component<EnhancedTableProps> {
+  handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
+    mainStore.setFilterOverlayAnchorEl(mainStore.filterOverlayAnchorEl ? null : event.currentTarget);
+  };
+
   render() {
     const orderDirection = mainStore.orderDirection;
     const orderedByColumn = mainStore.orderedByColumn;
     const rowCount = mainStore.currentPage.length;
+    const open = Boolean(mainStore.filterOverlayAnchorEl);
+    const id = open ? "simple-popper" : undefined;
     const renderHeaderBody = index => {
       return (
         <Fragment>
@@ -32,7 +38,14 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
             ></TableSortLabel>
             {mainStore.columnDefinitions[index].name}
           </div>
-          <div>{`{FILTER BUTTON}`}</div>
+          <div>
+            <button aria-describedby={id} type="button" onClick={this.handleFilterClick}>
+              {`<212121221,1121221>`}
+            </button>
+            <Popper id={id} open={open} anchorEl={mainStore.filterOverlayAnchorEl}>
+              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>The content of the Popper.</Box>
+            </Popper>
+          </div>
         </Fragment>
       );
     };
