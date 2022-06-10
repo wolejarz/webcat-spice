@@ -47,7 +47,7 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
             return data;
         }
       });
-      if (index < 50) mainStore.dataSet.push({ dataRow: typedDataRow, isSelected: false });
+      mainStore.dataSet.push({ dataRow: typedDataRow, isSelected: false });
     }
   });
   console.log(
@@ -68,15 +68,6 @@ export const fetchDefinitionsFromFile = async url => {
 
 export const compareRows = (a, b, orderedByColumn, orderedByColumnIndex, orderDirection, dataType) => {
   if (orderedByColumnIndex < 0) return 0;
-  console.log(
-    "SORTING:",
-    a.dataRow[orderedByColumnIndex],
-    b.dataRow[orderedByColumnIndex],
-    orderedByColumn,
-    orderedByColumnIndex,
-    orderDirection,
-    dataType
-  );
   let compResult;
   switch (dataType) {
     case "f":

@@ -52,7 +52,6 @@ class DataGrid extends React.Component {
   };
 
   render() {
-    const emptyRows = mainStore.currentPage.length === 0 || mainStore.pageSize === 0;
     const dataRows = mainStore.dataIsLoaded
       ? mainStore.currentPage.map((row, rowIndex) => {
           const isItemSelected = row.isSelected;
@@ -98,18 +97,7 @@ class DataGrid extends React.Component {
                   onSelectAllClick={this.handleSelectAllClick}
                   onRequestSort={this.handleRequestSort}
                 />
-                <TableBody>
-                  {dataRows}
-                  {emptyRows && (
-                    <TableRow
-                      style={{
-                        height: "53px"
-                      }}
-                    >
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
+                <TableBody>{dataRows}</TableBody>
               </Table>
             ) : null}
           </TableContainer>
