@@ -66,16 +66,17 @@ export const fetchDefinitionsFromFile = async url => {
   return definitions;
 };
 
-export const compareRows = (a, b, orderedByColumn, orderedByColumnIndex, orderDirection, dataType) => {
+export const compareRows = (a, b, orderedByColumnIndex, orderDirection, dataType) => {
   if (orderedByColumnIndex < 0) return 0;
   let compResult;
   switch (dataType) {
     case "f":
     case "l":
-      compResult = a.dataRow[orderedByColumnIndex] - b.dataRow[orderedByColumnIndex];
+      compResult = b.dataRow[orderedByColumnIndex] - a.dataRow[orderedByColumnIndex];
       break;
     default:
-      compResult = a.dataRow[orderedByColumnIndex] - b.dataRow[orderedByColumnIndex];
+      compResult = b.dataRow[orderedByColumnIndex].localeCompare(a.dataRow[orderedByColumnIndex]);
   }
+  if (orderDirection === "asc") return -compResult;
   return compResult;
 };
