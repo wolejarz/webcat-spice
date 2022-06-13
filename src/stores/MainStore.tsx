@@ -34,6 +34,8 @@ class MainStore {
 
   dataIsLoaded = false;
 
+  filterOverlayIsActive = false;
+
   filterOverlayAnchorEl: null | HTMLElement;
 
   constructor() {
@@ -45,6 +47,7 @@ class MainStore {
       orderDirection: observable,
       infoBarMessage: observable,
       dataIsLoaded: observable,
+      filterOverlayIsActive: observable,
       filterOverlayAnchorEl: observable,
       sortedDataRows: computed,
       filteredDataRows: computed,
@@ -59,6 +62,7 @@ class MainStore {
       setPageNr: action,
       setDataIsLoaded: action,
       toggleSelection: action,
+      setFilterOverlayIsActive: action,
       setFilterOverlayAnchorEl: action
     });
   }
@@ -120,6 +124,10 @@ class MainStore {
 
   setFilterOverlayAnchorEl = element => {
     this.filterOverlayAnchorEl = element;
+  };
+
+  setFilterOverlayIsActive = status => {
+    this.filterOverlayIsActive = status;
   };
 
   isFiltered = (dataRow, activeFilters) => {
