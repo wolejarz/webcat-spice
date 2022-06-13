@@ -31,7 +31,11 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
         mainStore.columnDefinitions.push({
           name: name,
           type: columnDefinitions[name].type,
-          width: columnDefinitions[name].display_width
+          width: columnDefinitions[name].display_width,
+          minValue: "",
+          maxValue: "",
+          pattern: "",
+          filterMode: "range"
         });
       });
       mainStore.replaceColumnsOnCurrentPage(newColumns);
