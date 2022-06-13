@@ -18,8 +18,10 @@ interface EnhancedTableProps {
 }
 
 class EnhancedTableHead extends React.Component<EnhancedTableProps> {
-  handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
-    mainStore.setFilterOverlayAnchorEl(mainStore.filterOverlayAnchorEl ? null : event.currentTarget);
+  handleFilterClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+    mainStore.setFilterOverlayAnchorEl(event.currentTarget);
+    mainStore.setFilterOverlayIsActive(true);
+    mainStore.filterColumnIndex = index;
   };
 
   render() {
@@ -40,14 +42,9 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
             {mainStore.columnDefinitions[index].name}
           </div>
           <div>
-            <button aria-describedby={id} type="button" onClick={this.handleFilterClick}>
+            <button aria-describedby={id} type="button" onClick={event => this.handleFilterClick(event, index)}>
               {`<212121221,1121221>`}
             </button>
-            <Popper id={id} open={open} anchorEl={mainStore.filterOverlayAnchorEl}>
-              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                <FilterOverlay columnIndex={index} />
-              </Box>
-            </Popper>
           </div>
         </Fragment>
       );
@@ -66,6 +63,11 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
                 "aria-label": "select all desserts"
               }}
             />
+            <Popper id={id} open={open} anchorEl={mainStore.filterOverlayAnchorEl}>
+              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                <FilterOverlay />
+              </Box>
+            </Popper>
           </TableCell>
           {mainStore.columnsOnCurrentPage.map(index => (
             <TableCell key={mainStore.columnDefinitions[index].name} align={"left"}>

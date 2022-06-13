@@ -19,6 +19,7 @@ class MainStore {
   columnsOnCurrentPage = observable.array();
   globalOverlayHandlers: any[] = [];
   dataFetchingHasStarted = false;
+  filterColumnIndex = 0;
 
   startPageIndex = 0;
 
