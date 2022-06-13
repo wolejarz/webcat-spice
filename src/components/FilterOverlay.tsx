@@ -3,16 +3,12 @@ import { observer } from "mobx-react";
 import React, { Fragment } from "react";
 import mainStore from "../stores/MainStore";
 
-interface FilterOverlayInterface {
-  columnIndex: number;
-}
-
-class FilterOverlay extends React.Component<FilterOverlayInterface> {
+class FilterOverlay extends React.Component {
   render() {
     return (
       <Fragment>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <TextField id="min-value" label="MinValue" variant="outlined" />
+        <TextField id="max-value" label="MaxValue" variant="outlined" />
       </Fragment>
     );
   }
