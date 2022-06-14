@@ -5,13 +5,13 @@ import mainStore from "../stores/MainStore";
 
 class FilterOverlay extends React.Component {
   handleMinValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("minvalue changed before:", mainStore.columnDefinitions[mainStore.filterColumnIndex].minValue);
-    mainStore.columnDefinitions[mainStore.filterColumnIndex].minValue = event.target.value;
-    console.log("minvalue changed afte:", mainStore.columnDefinitions[mainStore.filterColumnIndex].minValue);
+    const currentFilter = mainStore.columnDefinitions[mainStore.filterColumnIndex].filter;
+    currentFilter.setValues(event.target.value, "", "");
   };
 
   handleMaxValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    mainStore.columnDefinitions[mainStore.filterColumnIndex].maxValue = event.target.value;
+    const currentFilter = mainStore.columnDefinitions[mainStore.filterColumnIndex].filter;
+    currentFilter.setValues("", event.target.value, "");
   };
 
   render() {
