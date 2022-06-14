@@ -16,12 +16,11 @@ class FilterOverlay extends React.Component {
 
   render() {
     const index = mainStore.filterColumnIndex;
-    console.log("index from render", index);
     return (
       <Fragment>
         <TextField
           id="min-value"
-          value={mainStore.columnDefinitions[index].minValue}
+          value={mainStore.columnDefinitions[index].filter.minValue}
           onChange={this.handleMinValueChange}
           label="MinValue"
           variant="outlined"
@@ -29,7 +28,7 @@ class FilterOverlay extends React.Component {
         />
         <TextField
           id="max-value"
-          value={mainStore.columnDefinitions[index].maxValue}
+          value={mainStore.columnDefinitions[index].filter.maxValue}
           onChange={this.handleMaxValueChange}
           label="MaxValue"
           variant="outlined"

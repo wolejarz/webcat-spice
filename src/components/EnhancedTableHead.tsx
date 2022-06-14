@@ -21,7 +21,7 @@ class EnhancedTableHead extends React.Component<EnhancedTableProps> {
   handleFilterClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     mainStore.setFilterOverlayAnchorEl(event.currentTarget);
     mainStore.setFilterOverlayIsActive(true);
-    mainStore.filterColumnIndex = index;
+    mainStore.setFilterColumnIndex(index);
   };
 
   render() {

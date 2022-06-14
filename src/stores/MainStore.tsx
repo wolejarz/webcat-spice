@@ -19,7 +19,6 @@ class MainStore {
   columnsOnCurrentPage = observable.array();
   globalOverlayHandlers: any[] = [];
   dataFetchingHasStarted = false;
-  filterColumnIndex = 0;
 
   // observables
 
@@ -41,6 +40,8 @@ class MainStore {
 
   filterOverlayAnchorEl: null | HTMLElement;
 
+  filterColumnIndex = 0;
+
   constructor() {
     makeObservable(this, {
       startPageIndex: observable,
@@ -52,6 +53,7 @@ class MainStore {
       dataIsLoaded: observable,
       filterOverlayIsActive: observable,
       filterOverlayAnchorEl: observable,
+      filterColumnIndex: observable,
       sortedDataRows: computed,
       filteredDataRows: computed,
       currentPage: computed,
@@ -66,7 +68,8 @@ class MainStore {
       setDataIsLoaded: action,
       toggleSelection: action,
       setFilterOverlayIsActive: action,
-      setFilterOverlayAnchorEl: action
+      setFilterOverlayAnchorEl: action,
+      setFilterColumnIndex: action
     });
   }
 
@@ -135,6 +138,10 @@ class MainStore {
 
   setFilterOverlayIsActive = status => {
     this.filterOverlayIsActive = status;
+  };
+
+  setFilterColumnIndex = index => {
+    this.filterColumnIndex = index;
   };
 
   // standard methods
