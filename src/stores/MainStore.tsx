@@ -21,6 +21,8 @@ class MainStore {
   dataFetchingHasStarted = false;
   filterColumnIndex = 0;
 
+  // observables
+
   startPageIndex = 0;
 
   pageSize = 10;
@@ -68,6 +70,8 @@ class MainStore {
     });
   }
 
+  //computed
+
   get sortedDataRows() {
     const rawData = this.dataIsLoaded ? this.dataSet.slice() : [];
     const orderedByColumnIndex = this.columnDefinitions.findIndex(column => column.name === this.orderedByColumn);
@@ -85,6 +89,8 @@ class MainStore {
     const data = this.filteredDataRows.slice(this.pageNr * this.pageSize, (this.pageNr + 1) * this.pageSize);
     return data;
   }
+
+  //actions
 
   replaceColumnsOnCurrentPage = newColumns => this.columnsOnCurrentPage.replace(newColumns);
 
@@ -130,6 +136,8 @@ class MainStore {
   setFilterOverlayIsActive = status => {
     this.filterOverlayIsActive = status;
   };
+
+  // standard methods
 
   isFiltered = (dataRow, activeFilters) => {
     if (activeFilters.length === 0) {
