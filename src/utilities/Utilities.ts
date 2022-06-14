@@ -1,3 +1,4 @@
+import Filter from "../models/Filter";
 import mainStore from "../stores/MainStore";
 
 export const fetchDataFromFile = async (url, columnDefinitions) => {
@@ -28,14 +29,12 @@ export const fetchDataFromFile = async (url, columnDefinitions) => {
       columns.forEach((nameAndType, index) => {
         const name = nameAndType.split(":")[0];
         newColumns.push(index);
+        const filter = new Filter();
         mainStore.columnDefinitions.push({
           name: name,
           type: columnDefinitions[name].type,
           width: columnDefinitions[name].display_width,
-          minValue: "",
-          maxValue: "",
-          pattern: "",
-          filterMode: "range"
+          filter: filter
         });
       });
       mainStore.replaceColumnsOnCurrentPage(newColumns);
